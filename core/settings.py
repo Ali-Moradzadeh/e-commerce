@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+activate_app = lambda app_name: f'{app_name}.apps.{app_name.capitalize()}Config'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #internal apps
+    activate_app('shop'),
 ]
 
 MIDDLEWARE = [
@@ -121,3 +126,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
