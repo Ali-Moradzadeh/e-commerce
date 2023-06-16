@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     activate_app('shop'),
     activate_app('cart'),
     activate_app('orders'),
+    activate_app('payment'),
 ]
 
 MIDDLEWARE = [
@@ -130,10 +132,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CART_SESSION_ID = 'cart'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+with open("/data/data/com.termux/files/home/sec/e-commerce/stripe_payment_configs.json") as conf:
+    stripe_payment_configs = json.load(conf)
+
+STRIPE_PUBLISHABLE_KEY = stripe_payment_configs["STRIPE_PUBLISHABLE_KEY"]
+STRIPE_SECRET_KEY = stripe_payment_configs["STRIPE_SECRET_KEY"]
+STRIPE_API_VERSION = stripe_payment_configs["STRIPE_API_VERSION"]
+STRIPE_WEBHOOK_SECRET = stripe_payment_configs["STRIPE_WEBHOOK_SECRET"]
