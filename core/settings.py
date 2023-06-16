@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     #internal apps
     activate_app('shop'),
     activate_app('cart'),
+    activate_app('orders'),
 ]
 
 MIDDLEWARE = [
